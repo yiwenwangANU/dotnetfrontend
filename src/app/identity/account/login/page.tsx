@@ -1,4 +1,5 @@
 "use client";
+import Button from "@/components/Buttom";
 import { useForm, SubmitHandler } from "react-hook-form";
 
 type Inputs = {
@@ -24,9 +25,10 @@ const Login = () => {
         <input
           placeholder="Email"
           className="border rounded border-gray-200 p-4 text-xl"
-          {...(register("email"), { required: true })}
+          {...register("email", { required: true })}
         />
         <input
+          type="password"
           placeholder="Password"
           className="border rounded border-gray-200 p-4 text-xl"
           {...register("password", { required: true })}
@@ -37,7 +39,7 @@ const Login = () => {
           <input type="checkbox" id="rememberMe" {...register("rememberMe")} />
           <label htmlFor="rememberMe">Remember me?</label>
         </div>
-        <input type="submit" />
+        <Button type="submit">Log in</Button>
       </form>
     </div>
   );
