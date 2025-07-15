@@ -1,7 +1,8 @@
 "use client";
 import Button from "@/components/Buttom";
+import { useEffect } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
-
+import { mutation } from "@/hooks/useLogin";
 type Inputs = {
   email: string;
   password: string;
@@ -12,9 +13,31 @@ const Login = () => {
   const {
     register,
     handleSubmit,
+    setValue,
     formState: { errors },
   } = useForm<Inputs>();
-  const onSubmit: SubmitHandler<Inputs> = (data) => console.log(data);
+
+  // Pre-fill email on mount
+  useEffect(() => {
+    const rememberedEmail = localStorage.getItem("rememberedEmail");
+    if (rememberedEmail) {
+      setValue("email", rememberedEmail);
+      setValue("rememberMe", true);
+    }
+  }, [setValue]);
+
+  const onSubmit: SubmitHandler<Inputs> = (data) => {
+    console.log(data);
+    if (data.rememberMe) {
+      localStorage.setItem("rememberedEmail", data.email);
+    } else {
+      localStorage.removeItem("rememberedEmail");
+    }
+    mutation.mutate({
+      email: data.email,
+      password: data.password,
+    });
+  };
 
   return (
     <div className="flex flex-col gap-2 justify-center items-center">
