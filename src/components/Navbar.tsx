@@ -6,7 +6,7 @@ const Navbar = () => {
       <Link className="text-3xl" href={"/"}>
         NavBar
       </Link>
-      <div>Item1</div>
+      <Link href={"/identity/account/login"}>Login</Link>
       <div>Item2</div>
     </div>
   );
