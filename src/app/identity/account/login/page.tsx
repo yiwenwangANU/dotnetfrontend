@@ -2,7 +2,7 @@
 import Button from "@/components/Buttom";
 import { useEffect } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
-import { mutation } from "@/hooks/useLogin";
+import useLogin from "@/hooks/useLogin";
 type Inputs = {
   email: string;
   password: string;
@@ -10,6 +10,7 @@ type Inputs = {
 };
 
 const Login = () => {
+  const { mutate } = useLogin();
   const {
     register,
     handleSubmit,
@@ -33,8 +34,8 @@ const Login = () => {
     } else {
       localStorage.removeItem("rememberedEmail");
     }
-    mutation.mutate({
-      email: data.email,
+    mutate({
+      userName: data.email,
       password: data.password,
     });
   };

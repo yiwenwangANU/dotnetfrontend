@@ -3,7 +3,7 @@ import axios from "axios";
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL;
 
 type UserData = {
-  email: string;
+  userName: string;
   password: string;
 };
 
@@ -14,7 +14,7 @@ type LoginResponse = {
 export const loginUser = async (userData: UserData): Promise<LoginResponse> => {
   try {
     const response = await axios.post<LoginResponse>(
-      `${API_BASE_URL}/api/Login`,
+      `${API_BASE_URL}/api/Auth/Login`,
       userData,
       {
         headers: { "Content-Type": "application/json" },

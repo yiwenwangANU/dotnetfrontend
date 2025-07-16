@@ -5,7 +5,7 @@ const useLogin = () => {
   return useMutation({
     mutationFn: loginUser,
     onSuccess: () => {
-      // Invalidate and refetch
+      console.log("success!");
     },
   });
 };
