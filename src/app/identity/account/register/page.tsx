@@ -1,3 +1,4 @@
+"use client";
 import Button from "@/components/Buttom";
 import { useForm, SubmitHandler } from "react-hook-form";
 
@@ -37,23 +38,25 @@ const Register = () => {
           {...register("email", {
             required: "Please enter a email.",
             pattern: {
-              value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$/,
+              value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
               message: "Please enter a valid email.",
             },
           })}
         />
-        {errors.email && <span>{errors.email.message}</span>}
+        {errors.email && (
+          <span className="text-red-600">{errors.email.message}</span>
+        )}
         <input
           type="password"
           placeholder="Password"
           className="border rounded border-gray-200 p-4 text-xl"
           {...register("password", {
             required: "Please enter the password.",
-            min: {
+            minLength: {
               value: 6,
               message: "A valid password must between 6 to 20 characters.",
             },
-            max: {
+            maxLength: {
               value: 20,
               message: "A valid password must between 6 to 20 characters.",
             },
@@ -65,7 +68,9 @@ const Register = () => {
           })}
         />
         {/* errors will return when field validation fails  */}
-        {errors.password && <span>{errors.password.message}</span>}
+        {errors.password && (
+          <span className="text-red-600">{errors.password.message}</span>
+        )}
         <div className="flex flex-row gap-3">
           <input
             type="password"
@@ -78,7 +83,9 @@ const Register = () => {
             })}
           />
         </div>
-        {errors.re_password && <span>{errors.re_password.message}</span>}
+        {errors.re_password && (
+          <span className="text-red-600">{errors.re_password.message}</span>
+        )}
         <Button type="submit">Create Account</Button>
       </form>
     </div>
