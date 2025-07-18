@@ -86,7 +86,7 @@ const Register = () => {
         )}
         <div className="flex flex-row gap-3">
           <input
-            type="password"
+            type={showPassword ? "text" : "password"}
             placeholder="Confirm Password"
             className="border rounded border-gray-200 p-4 text-xl w-100"
             {...register("re_password", {
