@@ -80,7 +80,9 @@ const Login = () => {
           <input type="checkbox" id="rememberMe" {...register("rememberMe")} />
           <label htmlFor="rememberMe">Remember me?</label>
         </div>
-        <Button type="submit">Log in</Button>
+        <Button type="submit" className="w-100">
+          Log in
+        </Button>
       </form>
     </div>
   );

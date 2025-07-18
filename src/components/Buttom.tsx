@@ -3,11 +3,13 @@ import { ButtonHTMLAttributes, FC, ReactNode } from "react";
 type ButtonProps = {
   variant?: "primary" | "secondary" | "danger";
   children: ReactNode;
+  className?: string;
 } & ButtonHTMLAttributes<HTMLButtonElement>;
 
 const Button: FC<ButtonProps> = ({
   variant = "primary",
   children,
+  className = "",
   ...props
 }) => {
   const baseStyles = "px-4 py-2 rounded font-semibold";
@@ -18,7 +20,10 @@ const Button: FC<ButtonProps> = ({
     danger: "bg-red-600 text-white hover:bg-red-700",
   };
   return (
-    <button className={`${baseStyles} ${variantStyles[variant]}`} {...props}>
+    <button
+      className={`${baseStyles} ${variantStyles[variant]} ${className}`}
+      {...props}
+    >
       {children}
     </button>
   );

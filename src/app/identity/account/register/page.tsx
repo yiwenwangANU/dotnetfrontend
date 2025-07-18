@@ -99,7 +99,9 @@ const Register = () => {
         {errors.re_password && (
           <span className="text-red-600">{errors.re_password.message}</span>
         )}
-        <Button type="submit">Create Account</Button>
+        <Button type="submit" className="w-100 mt-4">
+          Create Account
+        </Button>
       </form>
     </div>
   );
