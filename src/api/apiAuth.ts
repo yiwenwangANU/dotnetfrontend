@@ -1,4 +1,5 @@
 import axios from "axios";
+import axiosInstance from "./api-instance";
 
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL;
 
@@ -9,10 +10,15 @@ type UserData = {
 
 export type LoginResponse = {
   token: string;
+  userName: string;
 };
 
 export type RegisterResponse = {
   message: string;
+};
+
+export type TestResponse = {
+  secret: string;
 };
 
 export const registerUser = async (
@@ -47,6 +53,27 @@ export const loginUser = async (userData: UserData): Promise<LoginResponse> => {
       {
         headers: { "Content-Type": "application/json" },
       }
+    );
+    return response.data;
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      if (error.response) {
+        // The request was made and the server responded with a status code
+        // that falls out of the range of 2xx
+        throw new Error(error.response.data.message || "Login failed");
+      } else if (error.request) {
+        // The request was made but no response was received
+        throw new Error("No response from server");
+      }
+    }
+    throw error;
+  }
+};
+
+export const testLogin = async (): Promise<TestResponse> => {
+  try {
+    const response = await axiosInstance.get<TestResponse>(
+      `${API_BASE_URL}/api/test/get`
     );
     return response.data;
   } catch (error) {
