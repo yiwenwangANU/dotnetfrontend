@@ -3,6 +3,7 @@ import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import QueryProvider from "@/components/QueryProvider";
+import { ToastContainer } from "react-toastify";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -18,6 +19,7 @@ export default function RootLayout({
       <body className="flex flex-col min-h-screen">
         <QueryProvider>
           <Navbar />
+          <ToastContainer />
           <main className="grow pt-6">{children}</main>
           <Footer />
         </QueryProvider>
