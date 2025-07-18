@@ -7,7 +7,7 @@ const Navbar = () => {
         NavBar
       </Link>
       <Link href={"/identity/account/login"}>Login</Link>
-      <div>Item2</div>
+      <Link href={"/identity/account/register"}>Register</Link>
     </div>
   );
 };

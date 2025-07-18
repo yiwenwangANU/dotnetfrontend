@@ -1,6 +1,6 @@
 "use client";
 import Button from "@/components/Buttom";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import useLogin from "@/hooks/useLogin";
 type Inputs = {
@@ -11,6 +11,10 @@ type Inputs = {
 
 const Login = () => {
   const { mutate } = useLogin();
+  const [showPassword, setShowPassword] = useState(false);
+  const togglePassword = () => {
+    setShowPassword((prev) => !prev);
+  };
   const {
     register,
     handleSubmit,
@@ -48,17 +52,17 @@ const Login = () => {
       <form className="flex flex-col gap-4" onSubmit={handleSubmit(onSubmit)}>
         <input
           placeholder="Email"
-          className="border rounded border-gray-200 p-4 text-xl"
-          {...register("email", { required: true })}
+          className="border rounded border-gray-200 p-4 text-xl w-100"
+          {...register("email", { required: "Please enter a email." })}
         />
+        {errors.password && <span>{errors.password.message}</span>}
         <input
-          type="password"
+          type={showPassword ? "text" : "password"}
           placeholder="Password"
-          className="border rounded border-gray-200 p-4 text-xl"
-          {...register("password", { required: true })}
+          className="border rounded border-gray-200 p-4 text-xl w-100"
+          {...register("password", { required: "Please enter your password." })}
         />
-        {/* errors will return when field validation fails  */}
-        {errors.password && <span>This field is required</span>}
+        {errors.password && <span>{errors.password.message}</span>}
         <div className="flex flex-row gap-3">
           <input type="checkbox" id="rememberMe" {...register("rememberMe")} />
           <label htmlFor="rememberMe">Remember me?</label>
