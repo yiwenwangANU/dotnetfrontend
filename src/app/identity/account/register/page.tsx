@@ -1,10 +1,6 @@
 "use client";
 import Button from "@/components/Buttom";
-import {
-  EyeDropperIcon,
-  EyeIcon,
-  EyeSlashIcon,
-} from "@heroicons/react/16/solid";
+import { EyeIcon, EyeSlashIcon } from "@heroicons/react/16/solid";
 import { useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 
