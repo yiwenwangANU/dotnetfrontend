@@ -7,11 +7,11 @@ type UserData = {
   password: string;
 };
 
-type LoginResponse = {
+export type LoginResponse = {
   token: string;
 };
 
-type RegisterResponse = {
+export type RegisterResponse = {
   message: string;
 };
 

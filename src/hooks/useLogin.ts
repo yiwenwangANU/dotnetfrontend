@@ -1,11 +1,12 @@
 import { loginUser } from "@/api/apiAuth";
 import { useMutation } from "@tanstack/react-query";
+import { toast } from "react-toastify";
 
 const useLogin = () => {
   return useMutation({
     mutationFn: loginUser,
     onSuccess: () => {
-      console.log("success!");
+      toast.success("Login successfully!");
     },
   });
 };

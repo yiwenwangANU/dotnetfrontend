@@ -1,5 +1,6 @@
 "use client";
 import Button from "@/components/Buttom";
+import useRegister from "@/hooks/useRegister";
 import { EyeIcon, EyeSlashIcon } from "@heroicons/react/16/solid";
 import { useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
@@ -11,7 +12,7 @@ type Inputs = {
 };
 
 const Register = () => {
-  //   const { mutate } = useLogin();
+  const { mutate } = useRegister();
   const {
     register,
     handleSubmit,
@@ -21,10 +22,10 @@ const Register = () => {
   const password = watch("password");
   const onSubmit: SubmitHandler<Inputs> = (data) => {
     console.log(data);
-    // mutate({
-    //   userName: data.email,
-    //   password: data.password,
-    // });
+    mutate({
+      userName: data.email,
+      password: data.password,
+    });
   };
   const [showPassword, setShowPassword] = useState(false);
   const togglePassword = () => setShowPassword((prev) => !prev);
