@@ -73,7 +73,7 @@ export const loginUser = async (userData: UserData): Promise<LoginResponse> => {
 export const testLogin = async (): Promise<TestResponse> => {
   try {
     const response = await axiosInstance.get<TestResponse>(
-      `${API_BASE_URL}/api/test/get`
+      `${API_BASE_URL}/api/test`
     );
     return response.data;
   } catch (error) {
