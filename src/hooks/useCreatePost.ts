@@ -1,12 +1,12 @@
-import { RegisterResponse } from "@/api/apiAuth";
+import { createPost, CreatePostResponse } from "@/api/apiServices";
 import { useMutation } from "@tanstack/react-query";
 import { toast } from "react-toastify";
 
 const useCreatePost = () => {
   return useMutation({
-    mutationFn: registerUser,
-    onSuccess: (res: RegisterResponse) => {
-      console.log(res.message);
+    mutationFn: createPost,
+    onSuccess: (res: CreatePostResponse) => {
+      console.log(res);
       toast.success("Register successfully!");
     },
   });
