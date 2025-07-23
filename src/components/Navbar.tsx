@@ -8,6 +8,7 @@ const Navbar = () => {
       </Link>
       <Link href={"/identity/account/login"}>Login</Link>
       <Link href={"/identity/account/register"}>Register</Link>
+      <Link href={"/jobPostings/create"}>Create</Link>
       <Link href={"/identity/account/test"}>Test</Link>
     </div>
   );

@@ -9,7 +9,7 @@ const Test = () => {
         {isPending
           ? "Loading"
           : isError
-          ? "Something went wrong, plz login again"
+          ? "Login to see the top secret!"
           : data?.secret}
       </div>
     </div>
