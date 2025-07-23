@@ -23,7 +23,7 @@ const Register = () => {
   const onSubmit: SubmitHandler<Inputs> = (data) => {
     console.log(data);
     mutate({
-      userName: data.email,
+      email: data.email,
       password: data.password,
     });
   };

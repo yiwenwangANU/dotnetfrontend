@@ -7,7 +7,7 @@ const useCreatePost = () => {
     mutationFn: createPost,
     onSuccess: (res: CreatePostResponse) => {
       console.log(res);
-      toast.success("Register successfully!");
+      toast.success("Job Posting created successfully!");
     },
   });
 };

@@ -4,7 +4,7 @@ import axiosInstance from "./api-instance";
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL;
 
 type UserData = {
-  userName: string;
+  email: string;
   password: string;
 };
 

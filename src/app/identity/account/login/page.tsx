@@ -40,7 +40,7 @@ const Login = () => {
       localStorage.removeItem("rememberedEmail");
     }
     mutate({
-      userName: data.email,
+      email: data.email,
       password: data.password,
     });
   };
