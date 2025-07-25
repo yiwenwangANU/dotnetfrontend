@@ -1,13 +1,16 @@
 "use client";
+import Button from "@/components/Buttom";
 import useGetPost from "@/hooks/useGetPost";
+import { getLocalStorageUserName } from "@/services/jwtService";
 import { formatDistanceToNow } from "date-fns";
+import Link from "next/link";
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
 const JobPosting = () => {
-  const [userName, setUserName] = useState<string | null>(null);
+  const [userName, setUserName] = useState<string | undefined>();
   useEffect(() => {
-    setUserName(localStorage.getItem("userName"));
+    setUserName(getLocalStorageUserName());
   }, []);
   const params = useParams();
   const id = Number(params.id);
@@ -26,6 +29,14 @@ const JobPosting = () => {
           addSuffix: true,
         })}
       </div>
+      {userName ? (
+        <div>
+          <Link href={`/jobPostings/update/${id}`}>
+            <Button>Edit</Button>
+          </Link>
+          <Button>Delete</Button>
+        </div>
+      ) : null}
     </div>
   );
 };

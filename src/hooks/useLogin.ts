@@ -1,9 +1,11 @@
+"use client";
 import { LoginResponse, loginUser } from "@/api/apiAuth";
 import { useMutation } from "@tanstack/react-query";
-import { redirect } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
 
 const useLogin = () => {
+  const router = useRouter();
   return useMutation({
     mutationFn: loginUser,
     onSuccess: (res: LoginResponse) => {
@@ -11,7 +13,7 @@ const useLogin = () => {
       toast.success(`Welcome back, ${res.userName}!`);
       localStorage.setItem("token", res.token);
       localStorage.setItem("userName", res.userName);
-      redirect("/");
+      router.push("/");
     },
   });
 };
