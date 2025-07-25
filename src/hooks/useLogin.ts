@@ -1,5 +1,6 @@
 import { LoginResponse, loginUser } from "@/api/apiAuth";
 import { useMutation } from "@tanstack/react-query";
+import { redirect } from "next/navigation";
 import { toast } from "react-toastify";
 
 const useLogin = () => {
@@ -9,6 +10,7 @@ const useLogin = () => {
       console.log(res);
       toast.success(`Welcome back, ${res.userName}!`);
       localStorage.setItem("token", res.token);
+      redirect("/");
     },
   });
 };
