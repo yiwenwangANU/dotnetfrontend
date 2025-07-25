@@ -1,6 +1,7 @@
 "use client";
 import Button from "@/components/Buttom";
-import useCreatePost from "@/hooks/useCreatePost";
+import useGetPost from "@/hooks/useGetPost";
+import useUpdatePost from "@/hooks/useUpdatePost";
 import { useParams } from "next/navigation";
 import { useForm, SubmitHandler } from "react-hook-form";
 
@@ -13,9 +14,18 @@ type Inputs = {
 
 const Update = () => {
   const params = useParams();
-  const id = params.id;
+  const id = Number(params.id);
 
-  const { mutate } = useCreatePost();
+  const {
+    data,
+    isPending: loadingPost,
+    isError: loadingError,
+  } = useGetPost(id);
+  const {
+    mutate,
+    isPending: updatingPost,
+    isError: updatingError,
+  } = useUpdatePost(id);
   const {
     register,
     handleSubmit,
@@ -31,14 +41,18 @@ const Update = () => {
       location: data.location,
     });
   };
+  if (loadingPost) return <div>Loading...</div>;
+  if (loadingError || !data) return <div>Failed to load job posting.</div>;
+  const post = data.jobPosting;
 
   return (
     <div className="flex flex-col gap-2 justify-center items-center">
-      <div className="text-4xl">Create a Job Post</div>
+      <div className="text-4xl">Update a Job Post</div>
       <hr className="border-t-2 border-gray-600 mb-4" />
       <form className="flex flex-col gap-4" onSubmit={handleSubmit(onSubmit)}>
         <label>Title</label>
         <input
+          defaultValue={post.title}
           className="border rounded border-gray-200 p-4 text-xl w-100"
           {...register("title", {
             required: "Please enter a title.",
@@ -49,6 +63,7 @@ const Update = () => {
         )}
         <label>Description</label>
         <textarea
+          defaultValue={post.description}
           className="border rounded border-gray-200 p-4 text-xl w-100"
           {...register("description", {
             required: "Please enter a description.",
@@ -59,6 +74,7 @@ const Update = () => {
         )}
         <label>Company</label>
         <input
+          defaultValue={post.company}
           className="border rounded border-gray-200 p-4 text-xl w-100"
           {...register("company", {
             required: "Please enter a company.",
@@ -69,6 +85,7 @@ const Update = () => {
         )}
         <label>Location</label>
         <input
+          defaultValue={post.location}
           className="border rounded border-gray-200 p-4 text-xl w-100"
           {...register("location", {
             required: "Please enter a location.",
@@ -79,7 +96,7 @@ const Update = () => {
         )}
 
         <Button type="submit" className="w-100 mt-4">
-          Create a Post
+          Update
         </Button>
       </form>
     </div>

@@ -119,7 +119,7 @@ export const getPosting = async (id: number): Promise<GetPostingResponse> => {
 
 export const deletePosting = async (id: number): Promise<boolean> => {
   try {
-    const response = await axiosInstance.get<boolean>(
+    const response = await axiosInstance.delete<boolean>(
       `${API_BASE_URL}/api/JobPostings/deletePosting/${id}`
     );
     return response.data;
@@ -145,8 +145,10 @@ export const updatePosting = async (
   id: number
 ): Promise<boolean> => {
   try {
-    const response = await axiosInstance.get<boolean>(
-      `${API_BASE_URL}/api/JobPostings/updatePosting/${id}`
+    const response = await axiosInstance.post<boolean>(
+      `${API_BASE_URL}/api/JobPostings/updatePosting/${id}`,
+      data,
+      { headers: { "Content-Type": "application/json" } }
     );
     return response.data;
   } catch (error) {
