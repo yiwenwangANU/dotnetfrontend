@@ -116,3 +116,52 @@ export const getPosting = async (id: number): Promise<GetPostingResponse> => {
     throw error;
   }
 };
+
+export const deletePosting = async (id: number): Promise<boolean> => {
+  try {
+    const response = await axios.get<boolean>(
+      `${API_BASE_URL}/api/JobPostings/deletePosting/${id}`
+    );
+    return response.data;
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      if (error.response) {
+        // The request was made and the server responded with a status code
+        // that falls out of the range of 2xx
+        throw new Error(
+          error.response.data.message || "JobPosting creating failed"
+        );
+      } else if (error.request) {
+        // The request was made but no response was received
+        throw new Error("No response from server");
+      }
+    }
+    throw error;
+  }
+};
+
+export const updatePosting = async (
+  data: PostData,
+  id: number
+): Promise<boolean> => {
+  try {
+    const response = await axios.get<boolean>(
+      `${API_BASE_URL}/api/JobPostings/updatePosting/${id}`
+    );
+    return response.data;
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      if (error.response) {
+        // The request was made and the server responded with a status code
+        // that falls out of the range of 2xx
+        throw new Error(
+          error.response.data.message || "JobPosting creating failed"
+        );
+      } else if (error.request) {
+        // The request was made but no response was received
+        throw new Error("No response from server");
+      }
+    }
+    throw error;
+  }
+};
