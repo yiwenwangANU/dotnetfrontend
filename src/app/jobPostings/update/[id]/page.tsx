@@ -21,7 +21,7 @@ const Update = () => {
     isPending: loadingPost,
     isError: loadingError,
   } = useGetPost(id);
-  const { mutate, isPending: updatingPost } = useUpdatePost(id);
+  const { mutate, isPending: updatingPost } = useUpdatePost();
   const {
     register,
     handleSubmit,
@@ -31,10 +31,13 @@ const Update = () => {
   const onSubmit: SubmitHandler<Inputs> = (data) => {
     console.log(data);
     mutate({
-      title: data.title,
-      description: data.description,
-      company: data.company,
-      location: data.location,
+      id: id,
+      data: {
+        title: data.title,
+        description: data.description,
+        company: data.company,
+        location: data.location,
+      },
     });
   };
   if (loadingPost) return <div>Loading...</div>;
