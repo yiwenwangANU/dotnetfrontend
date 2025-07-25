@@ -30,11 +30,11 @@ const JobPosting = () => {
         })}
       </div>
       {userName ? (
-        <div>
+        <div className="flex flex-row justify-end items-center gap-5 pt-10">
           <Link href={`/jobPostings/update/${id}`}>
             <Button>Edit</Button>
           </Link>
-          <Button>Delete</Button>
+          <Button variant="danger">Delete</Button>
         </div>
       ) : null}
     </div>
