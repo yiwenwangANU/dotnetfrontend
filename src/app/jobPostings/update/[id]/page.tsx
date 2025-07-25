@@ -21,11 +21,7 @@ const Update = () => {
     isPending: loadingPost,
     isError: loadingError,
   } = useGetPost(id);
-  const {
-    mutate,
-    isPending: updatingPost,
-    isError: updatingError,
-  } = useUpdatePost(id);
+  const { mutate, isPending: updatingPost } = useUpdatePost(id);
   const {
     register,
     handleSubmit,
@@ -95,7 +91,7 @@ const Update = () => {
           <span className="text-red-600">{errors.location.message}</span>
         )}
 
-        <Button type="submit" className="w-100 mt-4">
+        <Button type="submit" className="w-100 mt-4" disabled={updatingPost}>
           Update
         </Button>
       </form>

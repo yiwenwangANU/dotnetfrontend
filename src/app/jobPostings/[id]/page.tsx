@@ -1,5 +1,6 @@
 "use client";
 import Button from "@/components/Buttom";
+import useDeletePost from "@/hooks/useDeletePost";
 import useGetPost from "@/hooks/useGetPost";
 import { getLocalStorageUserName } from "@/services/jwtService";
 import { formatDistanceToNow } from "date-fns";
@@ -15,6 +16,7 @@ const JobPosting = () => {
   const params = useParams();
   const id = Number(params.id);
   const { data, isPending, isError } = useGetPost(id);
+  const { mutate, isPending: isDeleting } = useDeletePost();
   if (isPending) return <div>Loading...</div>;
   if (isError || !data) return <div>Failed to load job posting.</div>;
   const post = data.jobPosting;
@@ -34,7 +36,15 @@ const JobPosting = () => {
           <Link href={`/jobPostings/update/${id}`}>
             <Button>Edit</Button>
           </Link>
-          <Button variant="danger">Delete</Button>
+          <Button
+            variant="danger"
+            disabled={isDeleting}
+            onClick={() => {
+              mutate(id);
+            }}
+          >
+            Delete
+          </Button>
         </div>
       ) : null}
     </div>
