@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import useLogin from "@/hooks/useLogin";
 import { EyeIcon, EyeSlashIcon } from "@heroicons/react/16/solid";
+import Link from "next/link";
 type Inputs = {
   email: string;
   password: string;
@@ -84,6 +85,12 @@ const Login = () => {
           Log in
         </Button>
       </form>
+      <Link
+        href={"/identity/account/register"}
+        className="text-blue-600 underline items-start"
+      >
+        Create a new account
+      </Link>
     </div>
   );
 };
