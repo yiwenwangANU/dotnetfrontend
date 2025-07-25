@@ -3,7 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 
 const useGetPost = (id: number) => {
   return useQuery({
-    queryKey: ["getPostings", id],
+    queryKey: ["getPosting", id],
     queryFn: () => getPosting(id),
   });
 };
