@@ -10,6 +10,7 @@ const useLogin = () => {
       console.log(res);
       toast.success(`Welcome back, ${res.userName}!`);
       localStorage.setItem("token", res.token);
+      localStorage.setItem("userName", res.userName);
       redirect("/");
     },
   });

@@ -2,8 +2,13 @@
 import useGetPost from "@/hooks/useGetPost";
 import { formatDistanceToNow } from "date-fns";
 import { useParams } from "next/navigation";
+import { useEffect, useState } from "react";
 
 const JobPosting = () => {
+  const [userName, setUserName] = useState<string | null>(null);
+  useEffect(() => {
+    setUserName(localStorage.getItem("userName"));
+  }, []);
   const params = useParams();
   const id = Number(params.id);
   const { data, isPending, isError } = useGetPost(id);
