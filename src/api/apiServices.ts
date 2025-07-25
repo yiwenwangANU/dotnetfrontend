@@ -21,6 +21,7 @@ export type CreatePostResponse = {
 
 export type GetPostingResponse = {
   jobPosting: {
+    id: number;
     title: string;
     description: string;
     company: string;
@@ -33,6 +34,7 @@ export type GetPostingResponse = {
 export type GetPostingsResponse = {
   jobPostings: [
     {
+      id: number;
       title: string;
       description: string;
       company: string;

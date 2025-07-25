@@ -1,6 +1,7 @@
 "use client";
 import useGetPosts from "@/hooks/userGetPosts";
 import { formatDistanceToNow } from "date-fns";
+import Link from "next/link";
 
 const JobPostings = () => {
   const { data } = useGetPosts();
@@ -9,8 +10,9 @@ const JobPostings = () => {
       <div className="font-semibold text-3xl py-6">Recommended for you</div>
       <div className="flex flex-col gap-6 w-full">
         {data?.jobPostings.map((post) => (
-          <div
+          <Link
             key={post.title}
+            href={`/jobPostings/${post.id}`}
             className="relative border-4 border-gray-100 rounded-2xl w-full p-3 hover:cursor-pointer hover:border-blue-600"
           >
             <div className="font-semibold text-2xl">{post.title}</div>
@@ -22,7 +24,7 @@ const JobPostings = () => {
                 addSuffix: true,
               })}
             </div>
-          </div>
+          </Link>
         ))}
       </div>
     </div>
