@@ -65,7 +65,6 @@ const Create = () => {
         )}
         <label>Location</label>
         <input
-          placeholder="location"
           className="border rounded border-gray-200 p-4 text-xl w-100"
           {...register("location", {
             required: "Please enter a location.",
