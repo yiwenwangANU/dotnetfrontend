@@ -3,11 +3,15 @@ import axiosInstance from "./api-instance";
 
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL;
 
-type UserData = {
+export type LoginData = {
   email: string;
   password: string;
 };
-
+export type RegisterData = {
+  email: string;
+  password: string;
+  isJobSeeker: boolean;
+};
 export type LoginResponse = {
   token: string;
   userName: string;
@@ -22,8 +26,9 @@ export type TestResponse = {
 };
 
 export const registerUser = async (
-  userData: UserData
+  userData: RegisterData
 ): Promise<RegisterResponse> => {
+  console.log(userData);
   try {
     const response = await axios.post<RegisterResponse>(
       `${API_BASE_URL}/api/Auth/Register`,
@@ -45,7 +50,9 @@ export const registerUser = async (
     throw error;
   }
 };
-export const loginUser = async (userData: UserData): Promise<LoginResponse> => {
+export const loginUser = async (
+  userData: LoginData
+): Promise<LoginResponse> => {
   try {
     const response = await axios.post<LoginResponse>(
       `${API_BASE_URL}/api/Auth/Login`,

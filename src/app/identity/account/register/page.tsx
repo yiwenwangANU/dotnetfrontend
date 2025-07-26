@@ -9,7 +9,7 @@ type Inputs = {
   email: string;
   password: string;
   re_password: string;
-  role: string;
+  isJobSeeker: string;
 };
 
 const Register = () => {
@@ -26,6 +26,7 @@ const Register = () => {
     mutate({
       email: data.email,
       password: data.password,
+      isJobSeeker: data.isJobSeeker == "true",
     });
   };
   const [showPassword, setShowPassword] = useState<boolean>(false);
@@ -104,15 +105,15 @@ const Register = () => {
           I am
           <input
             type="radio"
-            value="job_seeker"
+            value="true"
             defaultChecked
-            {...register("role", { required: true })}
+            {...register("isJobSeeker", { required: true })}
           />
           a JobSeeker
           <input
             type="radio"
-            value="employer"
-            {...register("role", { required: true })}
+            value="false"
+            {...register("isJobSeeker", { required: true })}
           />
           an Employer
         </label>
