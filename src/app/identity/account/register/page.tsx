@@ -9,6 +9,7 @@ type Inputs = {
   email: string;
   password: string;
   re_password: string;
+  role: string;
 };
 
 const Register = () => {
@@ -27,14 +28,14 @@ const Register = () => {
       password: data.password,
     });
   };
-  const [showPassword, setShowPassword] = useState(false);
+  const [showPassword, setShowPassword] = useState<boolean>(false);
   const togglePassword = () => setShowPassword((prev) => !prev);
   return (
     <div className="flex flex-col gap-2 justify-center items-center">
       <div className="text-4xl">Register</div>
       <div className="text-2xl ">Create a new Account</div>
       <hr className="border-t-2 border-gray-600 mb-4" />
-      <form className="flex flex-col gap-4" onSubmit={handleSubmit(onSubmit)}>
+      <form className="flex flex-col gap-4 " onSubmit={handleSubmit(onSubmit)}>
         <input
           placeholder="Email"
           className="border rounded border-gray-200 p-4 text-xl w-100"
@@ -99,6 +100,22 @@ const Register = () => {
         {errors.re_password && (
           <span className="text-red-600">{errors.re_password.message}</span>
         )}
+        <label className="flex items-center gap-2 mx-5">
+          I am
+          <input
+            type="radio"
+            value="job_seeker"
+            defaultChecked
+            {...register("role", { required: true })}
+          />
+          a JobSeeker
+          <input
+            type="radio"
+            value="employer"
+            {...register("role", { required: true })}
+          />
+          an Employer
+        </label>
         <Button type="submit" className="w-100 mt-4">
           Create Account
         </Button>
