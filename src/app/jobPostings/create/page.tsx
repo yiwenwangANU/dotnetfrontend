@@ -1,5 +1,5 @@
 "use client";
-import Button from "@/components/Buttom";
+import Button from "@/components/Button";
 import useCreatePost from "@/hooks/useCreatePost";
 import { useForm, SubmitHandler } from "react-hook-form";
 
@@ -19,7 +19,6 @@ const Create = () => {
   } = useForm<Inputs>();
 
   const onSubmit: SubmitHandler<Inputs> = (data) => {
-    console.log(data);
     mutate({
       title: data.title,
       description: data.description,

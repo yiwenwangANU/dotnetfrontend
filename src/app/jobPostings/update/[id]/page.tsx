@@ -1,5 +1,5 @@
 "use client";
-import Button from "@/components/Buttom";
+import Button from "@/components/Button";
 import useGetPost from "@/hooks/useGetPost";
 import useUpdatePost from "@/hooks/useUpdatePost";
 import { useParams } from "next/navigation";
@@ -29,7 +29,6 @@ const Update = () => {
   } = useForm<Inputs>();
 
   const onSubmit: SubmitHandler<Inputs> = (data) => {
-    console.log(data);
     mutate({
       id: id,
       data: {

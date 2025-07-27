@@ -1,7 +1,9 @@
 import axios from "axios";
 import axiosInstance from "./api-instance";
+import { env } from "@/lib/env";
+import { handleApiError } from "@/lib/api-error-handler";
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL;
+const API_BASE_URL = env.NEXT_PUBLIC_API_URL;
 
 export type PostData = {
   title: string;
@@ -55,19 +57,7 @@ export const createPost = async (
     );
     return response.data;
   } catch (error) {
-    if (axios.isAxiosError(error)) {
-      if (error.response) {
-        // The request was made and the server responded with a status code
-        // that falls out of the range of 2xx
-        throw new Error(
-          error.response.data.message || "JobPosting creating failed"
-        );
-      } else if (error.request) {
-        // The request was made but no response was received
-        throw new Error("No response from server");
-      }
-    }
-    throw error;
+    handleApiError(error, "Failed to create job posting");
   }
 };
 
@@ -78,19 +68,7 @@ export const getPostings = async (): Promise<GetPostingsResponse> => {
     );
     return response.data;
   } catch (error) {
-    if (axios.isAxiosError(error)) {
-      if (error.response) {
-        // The request was made and the server responded with a status code
-        // that falls out of the range of 2xx
-        throw new Error(
-          error.response.data.message || "JobPosting creating failed"
-        );
-      } else if (error.request) {
-        // The request was made but no response was received
-        throw new Error("No response from server");
-      }
-    }
-    throw error;
+    handleApiError(error, "Failed to fetch job postings");
   }
 };
 
@@ -101,19 +79,7 @@ export const getPosting = async (id: number): Promise<GetPostingResponse> => {
     );
     return response.data;
   } catch (error) {
-    if (axios.isAxiosError(error)) {
-      if (error.response) {
-        // The request was made and the server responded with a status code
-        // that falls out of the range of 2xx
-        throw new Error(
-          error.response.data.message || "JobPosting creating failed"
-        );
-      } else if (error.request) {
-        // The request was made but no response was received
-        throw new Error("No response from server");
-      }
-    }
-    throw error;
+    handleApiError(error, "Failed to fetch job posting");
   }
 };
 
@@ -124,19 +90,7 @@ export const deletePosting = async (id: number): Promise<boolean> => {
     );
     return response.data;
   } catch (error) {
-    if (axios.isAxiosError(error)) {
-      if (error.response) {
-        // The request was made and the server responded with a status code
-        // that falls out of the range of 2xx
-        throw new Error(
-          error.response.data.message || "JobPosting creating failed"
-        );
-      } else if (error.request) {
-        // The request was made but no response was received
-        throw new Error("No response from server");
-      }
-    }
-    throw error;
+    handleApiError(error, "Failed to delete job posting");
   }
 };
 
@@ -152,18 +106,6 @@ export const updatePosting = async (
     );
     return response.data;
   } catch (error) {
-    if (axios.isAxiosError(error)) {
-      if (error.response) {
-        // The request was made and the server responded with a status code
-        // that falls out of the range of 2xx
-        throw new Error(
-          error.response.data.message || "JobPosting creating failed"
-        );
-      } else if (error.request) {
-        // The request was made but no response was received
-        throw new Error("No response from server");
-      }
-    }
-    throw error;
+    handleApiError(error, "Failed to update job posting");
   }
 };

@@ -1,5 +1,5 @@
 "use client";
-import Button from "@/components/Buttom";
+import Button from "@/components/Button";
 import useRegister from "@/hooks/useRegister";
 import { EyeIcon, EyeSlashIcon } from "@heroicons/react/16/solid";
 import { useState } from "react";
@@ -22,7 +22,6 @@ const Register = () => {
   } = useForm<Inputs>();
   const password = watch("password");
   const onSubmit: SubmitHandler<Inputs> = (data) => {
-    console.log(data);
     mutate({
       email: data.email,
       password: data.password,

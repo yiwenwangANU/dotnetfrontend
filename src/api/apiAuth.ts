@@ -1,7 +1,9 @@
 import axios from "axios";
 import axiosInstance from "./api-instance";
+import { env } from "@/lib/env";
+import { handleApiError } from "@/lib/api-error-handler";
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL;
+const API_BASE_URL = env.NEXT_PUBLIC_API_URL;
 
 export type LoginData = {
   email: string;
@@ -28,7 +30,6 @@ export type TestResponse = {
 export const registerUser = async (
   userData: RegisterData
 ): Promise<RegisterResponse> => {
-  console.log(userData);
   try {
     const response = await axios.post<RegisterResponse>(
       `${API_BASE_URL}/api/Auth/Register`,
@@ -37,17 +38,7 @@ export const registerUser = async (
     );
     return response.data;
   } catch (error) {
-    if (axios.isAxiosError(error)) {
-      if (error.response) {
-        // The request was made and the server responded with a status code
-        // that falls out of the range of 2xx
-        throw new Error(error.response.data.message || "Register failed");
-      } else if (error.request) {
-        // The request was made but no response was received
-        throw new Error("No response from server");
-      }
-    }
-    throw error;
+    handleApiError(error, "Registration failed");
   }
 };
 export const loginUser = async (
@@ -63,17 +54,7 @@ export const loginUser = async (
     );
     return response.data;
   } catch (error) {
-    if (axios.isAxiosError(error)) {
-      if (error.response) {
-        // The request was made and the server responded with a status code
-        // that falls out of the range of 2xx
-        throw new Error(error.response.data.message || "Login failed");
-      } else if (error.request) {
-        // The request was made but no response was received
-        throw new Error("No response from server");
-      }
-    }
-    throw error;
+    handleApiError(error, "Login failed");
   }
 };
 
@@ -84,16 +65,6 @@ export const testLogin = async (): Promise<TestResponse> => {
     );
     return response.data;
   } catch (error) {
-    if (axios.isAxiosError(error)) {
-      if (error.response) {
-        // The request was made and the server responded with a status code
-        // that falls out of the range of 2xx
-        throw new Error(error.response.data.message || "Login failed");
-      } else if (error.request) {
-        // The request was made but no response was received
-        throw new Error("No response from server");
-      }
-    }
-    throw error;
+    handleApiError(error, "Test login failed");
   }
 };

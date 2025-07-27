@@ -1,5 +1,5 @@
 "use client";
-import Button from "@/components/Buttom";
+import Button from "@/components/Button";
 import useDeletePost from "@/hooks/useDeletePost";
 import useGetPost from "@/hooks/useGetPost";
 import { getLocalStorageUserName } from "@/services/jwtService";

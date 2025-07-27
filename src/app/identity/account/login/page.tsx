@@ -1,5 +1,5 @@
 "use client";
-import Button from "@/components/Buttom";
+import Button from "@/components/Button";
 import { useEffect, useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import useLogin from "@/hooks/useLogin";
@@ -34,7 +34,6 @@ const Login = () => {
   }, [setValue]);
 
   const onSubmit: SubmitHandler<Inputs> = (data) => {
-    console.log(data);
     if (data.rememberMe) {
       localStorage.setItem("rememberedEmail", data.email);
     } else {

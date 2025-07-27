@@ -10,7 +10,6 @@ const useCreatePost = () => {
   return useMutation({
     mutationFn: createPost,
     onSuccess: (res: CreatePostResponse) => {
-      console.log(res);
       queryClient.invalidateQueries({ queryKey: ["getPostings"] });
       toast.success("Job Posting created successfully!");
       router.push("/");

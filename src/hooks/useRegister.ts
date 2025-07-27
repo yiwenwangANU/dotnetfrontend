@@ -7,7 +7,6 @@ const useRegister = () => {
   return useMutation({
     mutationFn: registerUser,
     onSuccess: (res: RegisterResponse) => {
-      console.log(res.message);
       toast.success("Register successfully!");
       redirect("/login");
     },
