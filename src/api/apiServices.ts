@@ -1,6 +1,7 @@
 import axios from "axios";
 import { env } from "@/lib/env";
 import { handleApiError } from "@/lib/api-error-handler";
+import axiosInstance from "./api-instance";
 
 const API_BASE_URL = env.NEXT_PUBLIC_API_URL;
 
@@ -44,6 +45,12 @@ export type GetPostingsResponse = {
       userName: string;
     }
   ];
+};
+
+export type GetProfileResponse = {
+  UserId: string;
+  UserName: string;
+  Roles: [string];
 };
 export const createPost = async (
   postData: PostData
@@ -107,5 +114,17 @@ export const updatePosting = async (
     return response.data;
   } catch (error) {
     handleApiError(error, "Failed to update job posting");
+  }
+};
+
+export const getPorfile = async (): Promise<GetProfileResponse> => {
+  try {
+    const response = await axios.get<GetProfileResponse>(
+      `${API_BASE_URL}/api/auth/profile`,
+      { withCredentials: true }
+    );
+    return response.data;
+  } catch (error) {
+    handleApiError(error, "Failed to get user profile");
   }
 };
