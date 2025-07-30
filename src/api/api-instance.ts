@@ -1,17 +1,20 @@
 import axios from "axios";
+import { env } from "@/lib/env";
 
-const axiosInstance = axios.create();
+const API_BASE_URL = env.NEXT_PUBLIC_API_URL;
 
-// Add a request interceptor to attach the JWT
-axiosInstance.interceptors.request.use(
-  (config) => {
-    const token = localStorage.getItem("token");
-    if (token) {
-      config.headers.Authorization = `Bearer ${token}`;
-    }
-    return config;
-  },
-  (error) => Promise.reject(error)
-);
+const axiosInstance = axios.create({
+  baseURL: API_BASE_URL,
+  withCredentials: true,
+});
+
+// Interceptor to attach CSRF token
+axiosInstance.interceptors.request.use((config) => {
+  const csrfMatch = document.cookie.match(/XSRF-TOKEN=([^;]+)/);
+  if (csrfMatch) {
+    config.headers["X-CSRF-TOKEN"] = csrfMatch[1];
+  }
+  return config;
+});
 
 export default axiosInstance;

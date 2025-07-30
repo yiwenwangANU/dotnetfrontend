@@ -1,6 +1,7 @@
 import axios from "axios";
 import { env } from "@/lib/env";
 import { handleApiError } from "@/lib/api-error-handler";
+import axiosInstance from "./api-instance";
 
 const API_BASE_URL = env.NEXT_PUBLIC_API_URL;
 
@@ -45,7 +46,7 @@ export const loginUser = async (
   userData: LoginData
 ): Promise<LoginResponse> => {
   try {
-    const response = await axios.post<LoginResponse>(
+    const response = await axiosInstance.post<LoginResponse>(
       `${API_BASE_URL}/api/Auth/Login`,
       userData,
       {
