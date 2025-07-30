@@ -1,5 +1,4 @@
 import axios from "axios";
-import axiosInstance from "./api-instance";
 import { env } from "@/lib/env";
 import { handleApiError } from "@/lib/api-error-handler";
 
@@ -50,10 +49,10 @@ export const createPost = async (
   postData: PostData
 ): Promise<CreatePostResponse> => {
   try {
-    const response = await axiosInstance.post<CreatePostResponse>(
+    const response = await axios.post<CreatePostResponse>(
       `${API_BASE_URL}/api/JobPostings/createPosting`,
       postData,
-      { headers: { "Content-Type": "application/json" } }
+      { withCredentials: true }
     );
     return response.data;
   } catch (error) {
@@ -85,8 +84,9 @@ export const getPosting = async (id: number): Promise<GetPostingResponse> => {
 
 export const deletePosting = async (id: number): Promise<boolean> => {
   try {
-    const response = await axiosInstance.delete<boolean>(
-      `${API_BASE_URL}/api/JobPostings/deletePosting/${id}`
+    const response = await axios.delete<boolean>(
+      `${API_BASE_URL}/api/JobPostings/deletePosting/${id}`,
+      { withCredentials: true }
     );
     return response.data;
   } catch (error) {
@@ -99,10 +99,10 @@ export const updatePosting = async (
   id: number
 ): Promise<boolean> => {
   try {
-    const response = await axiosInstance.post<boolean>(
+    const response = await axios.post<boolean>(
       `${API_BASE_URL}/api/JobPostings/updatePosting/${id}`,
       data,
-      { headers: { "Content-Type": "application/json" } }
+      { withCredentials: true }
     );
     return response.data;
   } catch (error) {

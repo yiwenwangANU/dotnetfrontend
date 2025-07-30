@@ -1,5 +1,4 @@
 import axios from "axios";
-import axiosInstance from "./api-instance";
 import { env } from "@/lib/env";
 import { handleApiError } from "@/lib/api-error-handler";
 
@@ -33,8 +32,7 @@ export const registerUser = async (
   try {
     const response = await axios.post<RegisterResponse>(
       `${API_BASE_URL}/api/Auth/Register`,
-      userData,
-      { headers: { "Content-Type": "application/json" } }
+      userData
     );
     return response.data;
   } catch (error) {
@@ -49,7 +47,7 @@ export const loginUser = async (
       `${API_BASE_URL}/api/Auth/Login`,
       userData,
       {
-        headers: { "Content-Type": "application/json" },
+        withCredentials: true,
       }
     );
     return response.data;
@@ -60,9 +58,9 @@ export const loginUser = async (
 
 export const testLogin = async (): Promise<TestResponse> => {
   try {
-    const response = await axiosInstance.get<TestResponse>(
-      `${API_BASE_URL}/api/test`
-    );
+    const response = await axios.get<TestResponse>(`${API_BASE_URL}/api/test`, {
+      withCredentials: true,
+    });
     return response.data;
   } catch (error) {
     handleApiError(error, "Test login failed");
