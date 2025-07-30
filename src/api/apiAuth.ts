@@ -13,10 +13,7 @@ export type RegisterData = {
   password: string;
   isJobSeeker: boolean;
 };
-export type LoginResponse = {
-  token: string;
-  userName: string;
-};
+export type LoginResponse = { email: string };
 
 export type RegisterResponse = {
   message: string;
@@ -24,6 +21,11 @@ export type RegisterResponse = {
 
 export type TestResponse = {
   secret: string;
+};
+export type GetProfileResponse = {
+  UserId: string;
+  UserName: string;
+  Roles: [string];
 };
 
 export const registerUser = async (
@@ -64,5 +66,17 @@ export const testLogin = async (): Promise<TestResponse> => {
     return response.data;
   } catch (error) {
     handleApiError(error, "Test login failed");
+  }
+};
+
+export const getPorfile = async (): Promise<GetProfileResponse> => {
+  try {
+    const response = await axios.get<GetProfileResponse>(
+      `${API_BASE_URL}/api/auth/profile`,
+      { withCredentials: true }
+    );
+    return response.data;
+  } catch (error) {
+    handleApiError(error, "Failed to get user profile");
   }
 };

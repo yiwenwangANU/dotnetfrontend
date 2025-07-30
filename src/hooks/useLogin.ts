@@ -9,9 +9,7 @@ const useLogin = () => {
   return useMutation({
     mutationFn: loginUser,
     onSuccess: (res: LoginResponse) => {
-      toast.success(`Welcome back, ${res.userName}!`);
-      localStorage.setItem("token", res.token);
-      localStorage.setItem("userName", res.userName);
+      toast.success(`Welcome back, ${res.email}!`);
       router.push("/");
     },
   });
