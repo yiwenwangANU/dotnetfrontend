@@ -46,7 +46,7 @@ export const loginUser = async (
   userData: LoginData
 ): Promise<LoginResponse> => {
   try {
-    const response = await axiosInstance.post<LoginResponse>(
+    const response = await axios.post<LoginResponse>(
       `${API_BASE_URL}/api/Auth/Login`,
       userData,
       {
@@ -61,9 +61,9 @@ export const loginUser = async (
 
 export const testLogin = async (): Promise<TestResponse> => {
   try {
-    const response = await axios.get<TestResponse>(`${API_BASE_URL}/api/test`, {
-      withCredentials: true,
-    });
+    const response = await axiosInstance.get<TestResponse>(
+      `${API_BASE_URL}/api/test`
+    );
     return response.data;
   } catch (error) {
     handleApiError(error, "Test login failed");
@@ -72,9 +72,8 @@ export const testLogin = async (): Promise<TestResponse> => {
 
 export const getPorfile = async (): Promise<GetProfileResponse> => {
   try {
-    const response = await axios.get<GetProfileResponse>(
-      `${API_BASE_URL}/api/auth/profile`,
-      { withCredentials: true }
+    const response = await axiosInstance.get<GetProfileResponse>(
+      `${API_BASE_URL}/api/auth/profile`
     );
     return response.data;
   } catch (error) {
