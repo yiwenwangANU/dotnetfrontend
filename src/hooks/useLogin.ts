@@ -12,6 +12,7 @@ const useLogin = () => {
     onSuccess: (res: LoginResponse) => {
       toast.success(`Welcome back, ${res.email}!`);
       queryClient.invalidateQueries({ queryKey: ["getProfile"] });
+      queryClient.invalidateQueries({ queryKey: ["checkLogin"] });
       router.push("/");
     },
   });
