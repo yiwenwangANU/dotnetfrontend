@@ -24,9 +24,9 @@ export type TestResponse = {
   secret: string;
 };
 export type GetProfileResponse = {
-  UserId: string;
-  UserName: string;
-  Roles: [string];
+  userId: string;
+  userName: string;
+  roles: [string];
 };
 
 export const registerUser = async (
@@ -77,7 +77,6 @@ export const getPorfile = async (): Promise<GetProfileResponse> => {
     );
     return response.data;
   } catch (error) {
-    console.log(error);
     handleApiError(error, "Failed to get user profile");
   }
 };
