@@ -73,10 +73,19 @@ export const testLogin = async (): Promise<TestResponse> => {
 export const getPorfile = async (): Promise<GetProfileResponse> => {
   try {
     const response = await axiosInstance.get<GetProfileResponse>(
-      `${API_BASE_URL}/api/auth/profile`
+      `${API_BASE_URL}/api/auth/Profile`
     );
     return response.data;
   } catch (error) {
+    console.log(error);
     handleApiError(error, "Failed to get user profile");
+  }
+};
+
+export const logoutUser = async (): Promise<void> => {
+  try {
+    await axiosInstance.post(`${API_BASE_URL}/api/auth/logout`);
+  } catch (error) {
+    handleApiError(error, "Logout failed");
   }
 };

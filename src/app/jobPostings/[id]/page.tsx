@@ -2,17 +2,18 @@
 import Button from "@/components/Button";
 import useDeletePost from "@/hooks/useDeletePost";
 import useGetPost from "@/hooks/useGetPost";
-import { getLocalStorageUserName } from "@/services/jwtService";
 import { formatDistanceToNow } from "date-fns";
 import Link from "next/link";
 import { useParams } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useQuery } from "@tanstack/react-query";
+import { getPorfile } from "@/api/apiAuth";
 
 const JobPosting = () => {
-  const [userName, setUserName] = useState<string | undefined>();
-  useEffect(() => {
-    setUserName(getLocalStorageUserName());
-  }, []);
+  const { data: profile } = useQuery({
+    queryKey: ["getProfile"],
+    queryFn: getPorfile,
+    retry: false,
+  });
   const params = useParams();
   const id = Number(params.id);
   const { data, isPending, isError } = useGetPost(id);
@@ -31,7 +32,7 @@ const JobPosting = () => {
           addSuffix: true,
         })}
       </div>
-      {userName ? (
+      {profile?.UserName ? (
         <div className="flex flex-row justify-end items-center gap-5 pt-10">
           <Link href={`/jobPostings/update/${id}`}>
             <Button>Edit</Button>

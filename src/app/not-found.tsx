@@ -1,3 +1,4 @@
+"use client";
 import Link from 'next/link';
 import Button from '@/components/Button';
 
@@ -10,8 +11,8 @@ export default function NotFound() {
           Page Not Found
         </h2>
         <p className="text-gray-600 mb-8">
-          Sorry, we couldn't find the page you're looking for. It might have been removed, 
-          renamed, or didn't exist in the first place.
+          Sorry, we couldn&apos;t find the page you&apos;re looking for. It might have been removed, 
+          renamed, or didn&apos;t exist in the first place.
         </p>
         <div className="space-x-4">
           <Link href="/">

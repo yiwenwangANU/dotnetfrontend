@@ -1,3 +1,4 @@
+"use client";
 import { ButtonHTMLAttributes, FC, ReactNode } from "react";
 
 type ButtonProps = {

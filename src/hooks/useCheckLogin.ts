@@ -7,7 +7,7 @@ const useCheckLogin = () => {
     queryFn: () => getPorfile(),
     retry: false,
     staleTime: 1000 * 60 * 5, //  Cache for 5 minutes
-    select: (data) => Boolean(data?.UserId), // ✅ Return true/false
+    select: (data) => Boolean(data?.UserId), //  Return true/false
   });
 };
 
